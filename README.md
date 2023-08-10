@@ -4,7 +4,7 @@
 - I am planning on using PostgreSQL for my database needs.
 
 # Techonologies and Libaries used:
-- Backend: Flask(python)
+- Backend: Flask(Python)
 - Data Analysis: Pandas
 - Database: PostgreSQL
 - Frontend: HTML/CSS/Javascript(Use of React or VUE.JS will for a more robust UI will come in the future.) 
