@@ -11,4 +11,4 @@
 
 # Future Development:
 
-- Create a reminder future that  notifies a user  that they need to enter their expenses soon 
+- Create a reminder future that  notifies a user  that they need to enter their expenses soon.
