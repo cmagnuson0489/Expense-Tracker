@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sql_alchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -6,7 +6,6 @@ app = Flask(__name__)
 # Configuration for my PostgresSQL Database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://username.password@localhost:5432/expensetracker'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 db = SQLAlchemy(app)
 
 
@@ -17,7 +16,7 @@ class Expense(db.Model):
     date = db.Column(db.String(10), nullable=False)
 db.create_all()
 
-@app.rout('/')
+@app.route('/')
 
 def index():
     expenses = Expense.query.all()
@@ -34,6 +33,25 @@ def add_expense():
     db.session.commit()
     
     return redirect(url_for('index'))
+
+@app.route('/delete<int:id>', methods=['POST'])
+def delete_expenses(id):
+    expenses = Expense.query.get_or_404(id)
+    db.session.delete(expenses)
+    db.session.commit()
+    return redirect(url_for('index'))
+
+@app.route('/edit/<int:id>', methods=['POST'])
+
+def edit_expense(id):
+    expense = Expense.query.get_or_404(id)
+    expense.description = request.form.get('description')
+    expense.amount = request.form.get('date')
+    expense.category = request.form.get('category')
+    db.session.commit()
+    return redirect(url_for('index'))
+
+
 
 
 if __name__ == '__main__':
