@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+</head>
+<body>
+    <h1>Expense Tracker</h1>
+    <form action="/add" method="post">
+        <input type="text" name="description" placeholder="Description" required>
+        <input type="number" step="0.01" name="amount" placeholder="Amount" required>
+        <input type="date" name="date" required>
+        <select name="category" required>
+            <option value="" disabled selected>Select Category</option>
+            <option value="Utilities">Utilities</option>
+            <option value="Food">Food</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Rent">Rent</option>
+        </select>
+        <button type="submit">Add Expense</button>
+    </form>
+    
+    <ul>
+        {% for expense in expenses %}
+        <li>
+            {{ expense.date }} - {{ expense.description }}: ${{ expense.amount }} [{{ expense.category }}]
+            <form action="/delete/{{ expense.id }}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+            <form action="/edit/{{ expense.id }}" method="post" style="display:inline;">
+                <input type="text" name="description" placeholder="Description" value="{{ expense.description }}" required>
+                <input type="number" step="0.01" name="amount" placeholder="Amount" value="{{ expense.amount }}" required>
+                <input type="date" name="date" value="{{ expense.date }}" required>
+                <select name="category" required>
+                    <option value="Utilities" {% if expense.category == 'Utilities' %}selected{% endif %}>Utilities</option>
+                    <option value="Food" {% if expense.category == 'Food' %}selected{% endif %}>Food</option>
+                    <option value="Entertainment" {% if expense.category == 'Entertainment' %}selected{% endif %}>Entertainment</option>
+                    <option value="Rent" {% if expense.category == 'Rent' %}selected{% endif %}>Rent</option>
+                </select>
+                <button type="submit">Edit</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
