@@ -1,6 +1,6 @@
 - The purpose of this repository will be to create an expense tracker application that will allow users to keep track of their expenses.
 - Pandas will be used to handle the data analysis.
-- There will need to be a database created to store the incoming expenses that are entered by users.
+- There will need to be a database created to store the incoming expenses that are entered by users and available in their dashboard on login.
 - I am planning on using PostgreSQL for my database needs.
 
 # Techonologies and Libaries used:
